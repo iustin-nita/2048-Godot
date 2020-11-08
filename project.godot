@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="2048- Godot"
+run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Settings="*res://settings.gd"
 
 [display]
 

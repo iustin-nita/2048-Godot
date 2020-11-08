@@ -11,14 +11,16 @@ and deleting/replacing pieces.
 var width := 4
 var height := 4
 var board := []
-var xStart := 96
-var yStart := 796
+var xStart := 32
+var yStart := 900
 var offset := 128
 
+export var piece: PackedScene = preload("res://src/Piece.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	board = make_2d_array()
+	generateBackground()
 	pass # Replace with function body.
 
 
@@ -28,10 +30,12 @@ func _ready() -> void:
 
 
 func _on_TouchControl_move(direction: Vector2) -> void:
+	moveAllPieces(direction)
 	pass # Replace with function body.
 
 
 func _on_KeyboardControl_move(direction: Vector2) -> void:
+	moveAllPieces(direction)
 	pass # Replace with function body.
 
 func make_2d_array():
@@ -66,8 +70,21 @@ func isBlankSpace():
 				return true
 	return false
 	
+func moveAllPieces(direction: Vector2):
+	pass
 	
-	
+func generateNewPiece():
+	if isBlankSpace():
+		pass
+	else:
+		print("no more room")
+
+func generateBackground():
+	for i in width:
+		for j in height:
+			var temp = piece.instance()
+			add_child(temp)
+			temp.position = gridToPixel(Vector2(i,j))
 	
 	
 	
