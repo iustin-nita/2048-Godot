@@ -4,7 +4,7 @@ var color_schemes = {
 	"default": {
 		'background': Color8(0, 0, 0),
 		'0': Color8(203, 255, 0),
-		'2': Color8(204, 0, 255),
+		'2': Color8(111, 0, 255),
 		'4': Color8(255, 0, 110), 
 		'8': Color8(0, 255, 102),
 		'16': Color8(204, 0, 255),

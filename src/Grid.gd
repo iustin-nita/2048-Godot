@@ -12,16 +12,18 @@ var width := 4
 var height := 4
 var board := []
 var xStart := 32
-var yStart := 900
+var yStart := 400
 var offset := 128
+var firstPiece = true
 
 export var piece: PackedScene = preload("res://src/Piece.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 	board = make_2d_array()
 	generateBackground()
-	pass # Replace with function body.
+	generateNewPiece()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,7 +77,19 @@ func moveAllPieces(direction: Vector2):
 	
 func generateNewPiece():
 	if isBlankSpace():
-		pass
+		var piecesMade = 0
+		while piecesMade < 2:
+			print('while')
+			var x = int(floor(rand_range(0, 4)))
+			var y = int(floor(rand_range(0, 4)))
+			if board[x][y] == null:
+				var temp = piece.instance()
+				temp.value = generateStartingNumber()
+				add_child(temp)
+				board[x][y] = temp
+				temp.rect_position = gridToPixel(Vector2(x, y))
+				piecesMade += 1
+				print('temp', temp)
 	else:
 		print("no more room")
 
@@ -84,8 +98,15 @@ func generateBackground():
 		for j in height:
 			var temp = piece.instance()
 			add_child(temp)
-			temp.position = gridToPixel(Vector2(i,j))
+			temp.rect_position = gridToPixel(Vector2(i,j))
 	
-	
+func generateStartingNumber():
+	if firstPiece:
+		firstPiece = false
+		return 2
+	var temp = rand_range(0,100)
+	if temp <= 75:
+		return 2
+	return 4
 	
 	
