@@ -3,6 +3,7 @@ extends Button
 var value: int = 0
 var nextValue: int = 0
 
+onready var move_tween := $Tween
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -17,10 +18,13 @@ func _setup():
 	modulate = Settings.color_schemes["default"][String(value)]
 	if value > 0:
 		text = String(value)
+		nextValue = value * 2
 	else:
 		text = ""
 
+func move(pos: Vector2):
+	move_tween.interpolate_property(self, "rect_position", rect_position, pos, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+	move_tween.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func remove():
+	queue_free()
